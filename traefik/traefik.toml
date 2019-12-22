@@ -27,17 +27,17 @@ OnHostRule = true
   [acme.httpChallenge]
   entryPoint = "http"
 
-# [file]
-# [backends]
-#   [backends.django]
-#     [backends.django.servers.server1]
-#       url = "http://riso_django:5000"
+[file]
+[backends]
+  [backends.landing]
+    [backends.landing.servers.server1]
+      url = "http://landing_django:5000"
 
-# [frontends]
-#   [frontends.django]
-#     backend = "django"
-#     passHostHeader = true
-#     [frontends.django.headers]
-#       HostsProxyHeaders = ['X-CSRFToken']
-#     [frontends.django.routes.dr1]
-#       rule = "Host:crm.risotech.vn"
+[frontends]
+  [frontends.landing]
+    backend = "landing"
+    passHostHeader = true
+    [frontends.landing.headers]
+      HostsProxyHeaders = ['X-CSRFToken']
+    [frontends.landing.routes.dr1]
+      rule = "Host:crm.risotech.vn"
