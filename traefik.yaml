@@ -54,7 +54,7 @@ services:
         - "traefik.port=8080"
         - "traefik.backend=traefik"
         - "traefik.enable=true"
-        - "traefik.frontend.rule=Host:traefik.${DOMAIN:-localhost}"
+        - "traefik.frontend.rule=Host:traefik.risotech.vn"
         - "traefik.frontend.auth.basic.usersFile=/etc/htpasswd"
         - "traefik.frontend.headers.SSLRedirect=true"
         - "traefik.frontend.entryPoints=http,https"
