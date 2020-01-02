@@ -18,10 +18,10 @@ services:
       --acme.onHostRule=true
       --acme.onDemand=false
       --acme.acmelogging=true
-      --acme.email=support@risotech.vn
+      --acme.email=${EMAIL:-root@localhost}
       --docker
       --docker.swarmMode
-      --docker.domain=risotech.vn
+      --docker.domain=${DOMAIN:-localhost}
       --docker.watch
       --defaultentrypoints=http,https
       --entrypoints='Name:http Address::80'
@@ -37,7 +37,7 @@ services:
       - source: traefik_htpasswd
         target: /etc/htpasswd
     networks:
-      - az-network
+      - public
     deploy:
       mode: replicated
       replicas: 1
@@ -50,20 +50,23 @@ services:
       restart_policy:
         condition: on-failure
       labels:
-        - "traefik.docker.network=az-network"
+        - "traefik.docker.network=public"
         - "traefik.port=8080"
         - "traefik.backend=traefik"
         - "traefik.enable=true"
-        - "traefik.frontend.rule=Host:traefik.risotech.vn"
+        - "traefik.frontend.rule=Host:traefik.${DOMAIN:-localhost}"
+        - "traefik.frontend.auth.basic.usersFile=/etc/htpasswd"
         - "traefik.frontend.headers.SSLRedirect=true"
         - "traefik.frontend.entryPoints=http,https"
 
+configs:
+  traefik_htpasswd:
+    file: ./htpasswd
 
 networks:
-  az-network:
-      external: true
+  public:
+    driver: overlay
+    name: public
 
-      
 volumes:
   traefik_certs: {}
-
