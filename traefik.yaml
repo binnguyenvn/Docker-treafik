@@ -55,19 +55,15 @@ services:
         - "traefik.backend=traefik"
         - "traefik.enable=true"
         - "traefik.frontend.rule=Host:traefik.risotech.vn"
-        - "traefik.frontend.auth.basic.usersFile=/etc/htpasswd"
         - "traefik.frontend.headers.SSLRedirect=true"
         - "traefik.frontend.entryPoints=http,https"
 
-configs:
-  traefik_htpasswd:
-    file: ./htpasswd
 
 networks:
   az-network:
-    driver: overlay
-    name: az-network
+      external: true
 
+      
 volumes:
   traefik_certs: {}
 
