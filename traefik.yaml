@@ -37,7 +37,7 @@ services:
       - source: traefik_htpasswd
         target: /etc/htpasswd
     networks:
-      - public
+      - az-network
     deploy:
       mode: replicated
       replicas: 1
