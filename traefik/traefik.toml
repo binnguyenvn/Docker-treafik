@@ -1,8 +1,9 @@
 
-logLevel = "ERROR"
+logLevel = "DEBUG"
 defaultEntryPoints = ["http", "https"]
 [log]
   filePath = "/treafik.log"
+
 # Entrypoints, http and https
 [entryPoints]
   # http should be redirected to https
@@ -27,17 +28,5 @@ OnHostRule = true
   [acme.httpChallenge]
   entryPoint = "http"
 
-[file]
-[backends]
-  [backends.landing]
-    [backends.landing.servers.server1]
-      url = "http://landing_django:5000"
-
-[frontends]
-  [frontends.landing]
-    backend = "landing"
-    passHostHeader = true
-    [frontends.landing.headers]
-      HostsProxyHeaders = ['X-CSRFToken']
-    [frontends.landing.routes.dr1]
-      rule = "Host:crm.risotech.vn"
+[api]
+  dashboard = true
