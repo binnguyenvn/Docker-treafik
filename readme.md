@@ -1,14 +1,10 @@
-nano ~/crm-treafik/traefik.yaml
+Setup
+^^^^^
+- Create htpasswd file to create basic auth
+- username:password
+- Passwords must be encoded using MD5, SHA1, or BCrypt.
 
-sudo docker stack deploy -c ~/crm-treafik/traefik.yaml traefik
-
-sudo docker stack rm traefik
-
-sudo docker-compose -f ~/crm-landing/production.yml build
-
-sudo docker stack deploy -c ~/crm-landing/production.yml landing
-
-sudo docker-compose -f ~/crm-core/production.yml build
-
-sudo docker stack deploy -c ~/crm-core/production.yml bin
+Start Treafik
+^^^^^^^^^^^^^
+- sudo docker stack deploy -c ~/crm-treafik/traefik.yaml traefik
 
